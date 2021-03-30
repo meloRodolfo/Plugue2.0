@@ -19,7 +19,7 @@ public abstract class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column
     private String nome;
@@ -33,18 +33,18 @@ public abstract class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String contato, String senha) {
+    public Usuario(Long id, String nome, String contato, String senha) {
         this.id = id;
         this.nome = nome;
         this.contato = contato;
         this.senha = senha;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public abstract class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Usuario id(int id) {
+    public Usuario id(Long id) {
         setId(id);
         return this;
     }

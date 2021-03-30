@@ -42,10 +42,10 @@ public class HelloController {
         Professor professor = new Professor();
         List<Ideia> ideias = new ArrayList<>();
         ideias.add(ideia);
-        professor.setNome("teste");
-        professor.setContato("teste@gmail.com");
+        professor.setNome("teste2");
+        professor.setContato("teste2@gmail.com");
         professor.setSenha("****");
-        professor.setPaginaPessoal("teste.com.br");
+        professor.setPaginaPessoal("teste2.com.br");
         professor.setIdeias(ideias);
         
         Projeto projeto = new Projeto();

@@ -18,7 +18,7 @@ public class ProjetoService {
         dao.save(projeto);
     }
 
-    public void updateProjeto(int id, Projeto projeto) {
+    public void updateProjeto(Long id, Projeto projeto) {
         projeto.setId(id);
         dao.save(projeto);
     }

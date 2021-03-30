@@ -18,7 +18,7 @@ public class IdeiaService {
         dao.save(ideia);
     }
 
-    public void updateIdeia(int id, Ideia ideia){
+    public void updateIdeia(Long id, Ideia ideia){
         ideia.setId(id);
         dao.save(ideia);
     }
