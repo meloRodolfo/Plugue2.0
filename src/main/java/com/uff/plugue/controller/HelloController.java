@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @Autowired
+    /*@Autowired
     ProfessorService profService = new ProfessorService();
 
     @Autowired
@@ -29,12 +29,12 @@ public class HelloController {
     AlunoService alunoService = new AlunoService();
 
     @Autowired
-    ProjetoService projetoService = new ProjetoService();
+    ProjetoService projetoService = new ProjetoService();*/
     
     @GetMapping(value="/")
     public String getMethodName(){
         
-        Ideia ideia = new Ideia();
+        /*Ideia ideia = new Ideia();
         ideia.setTitulo("teste");
         ideia.setDescricao("teste");
         ideia.setAreaInteresse("teste");
@@ -66,7 +66,7 @@ public class HelloController {
         //profService.addProfessor(professor);
         //ideiaService.addIdeia(ideia);
         //alunoService.addAluno(aluno);
-        //projetoService.addProjeto(projeto);
+        //projetoService.addProjeto(projeto);*/
 
         return "Hello Word";
     }

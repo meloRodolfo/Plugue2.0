@@ -10,17 +10,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProfessorService {
-    
+
     @Autowired
     private ProfessorDAO dao;
 
-    public void addProfessor(Professor professor) {
-        dao.save(professor);
+    public boolean addProfessor(Professor professor) {
+        if (professor != null) {
+            dao.save(professor);
+            return true;
+        }
+        return false;
+
     }
 
-    public void updateProfessor(int id, Professor professor) {
-        professor.setId(id);
-        dao.save(professor);
+    public boolean updateProfessor(int id, Professor professor) {
+        if (id != 0 && professor != null) {
+            professor.setId(id);
+            dao.save(professor);
+            return true;
+        }
+        return false;
+
     }
 
     public Optional<Professor> getProfessor(Integer id) {
@@ -29,5 +39,23 @@ public class ProfessorService {
 
     public void deleteProfessor(Integer id) {
         dao.deleteById(id);
+    }
+
+    public boolean login(String login, String senha) {
+
+        return dao.findByContato(login, senha);
+    }
+
+    public boolean logout(Professor professor) {
+        return true;
+    }
+
+    public void interessar() {
+
+    }
+
+    public void resetSenha(Integer id, String novaSenha) {
+        Optional<Professor> prof = dao.findById(id);
+        prof.get().setSenha(novaSenha);
     }
 }
