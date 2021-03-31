@@ -30,4 +30,14 @@ public class AlunoService {
     public void deleteAluno(int id) {
         dao.deleteById(id);
     }
+
+    public void login(String login, String senha) {
+        
+    }
+
+    public void logout() {}
+
+    public void resetarSenha() {}
+
+    public void interessar() {}
 }
