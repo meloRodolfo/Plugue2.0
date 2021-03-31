@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Column
     private String nome;
@@ -33,18 +33,18 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String contato, String senha) {
+    public Usuario(int id, String nome, String contato, String senha) {
         this.id = id;
         this.nome = nome;
         this.contato = contato;
         this.senha = senha;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    public Usuario id(Long id) {
+    public Usuario id(int id) {
         setId(id);
         return this;
     }

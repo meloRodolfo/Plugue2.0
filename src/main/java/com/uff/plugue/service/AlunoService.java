@@ -18,7 +18,7 @@ public class AlunoService {
         dao.save(aluno);
     }
 
-    public void updateAluno(Long id, Aluno aluno) {
+    public void updateAluno(int id, Aluno aluno) {
         aluno.setId(id);
         dao.save(aluno);
     }

@@ -23,7 +23,7 @@ public class Professor extends Usuario{
     public Professor() {
     }
 
-    public Professor(Long id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias) {
+    public Professor(int id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias) {
         super(id, nome, contato, senha);
         this.paginaPessoal = paginaPessoal;
         this.ideias = ideias;
@@ -45,7 +45,7 @@ public class Professor extends Usuario{
         this.ideias = ideias;
     }
 
-    public Professor id(Long id) {
+    public Professor id(int id) {
         setId(id);
         return this;
     }

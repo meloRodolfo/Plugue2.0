@@ -22,25 +22,29 @@ import org.springframework.http.MediaType;
 public class AlunoRest {
 
     @Autowired
-    private AlunoService alunoService;       
+    private AlunoService alunoService;  
     
-    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Aluno> busca (@PathVariable("id") int id){        
-        return alunoService.getAluno(id);
-    }
-
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void salvar(@RequestBody Aluno aluno) {
         alunoService.addAluno(aluno);
-    }
-    
-    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void atualizar(@PathVariable("id") long id, @RequestBody Aluno aluno) {
-        alunoService.updateAluno(id, aluno);
     }
 
     @DeleteMapping(path ={"/{id}"})
     public void deletar (@PathVariable("id") int id){
         alunoService.deleteAluno(id);
     }
+    
+    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Aluno> busca (@PathVariable("id") int id){        
+        return alunoService.getAluno(id);
+    }
+
+    
+    
+    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
+        alunoService.updateAluno(id, aluno);
+    }
+
+    
 }

@@ -22,13 +22,13 @@ public class IdeiaRes {
     @Autowired
     private IdeiaService ideiaService;
 
-    @PutMapping(consumes = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void salvar(@RequestBody Ideia ideia) {
         ideiaService.addIdeia(ideia);
     }
 
-    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
-    public void atualizar(@PathVariable("id") long id, @RequestBody Ideia ideia) {
+    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
         ideiaService.updateIdeia(id, ideia);
     }
 

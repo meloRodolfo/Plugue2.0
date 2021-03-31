@@ -20,7 +20,7 @@ public class Ideia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Column
     private String titulo;
@@ -40,7 +40,7 @@ public class Ideia implements Serializable {
     public Ideia() {
     }
 
-    public Ideia(Long id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
+    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
@@ -48,11 +48,11 @@ public class Ideia implements Serializable {
         this.professores = professores;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class Ideia implements Serializable {
         this.professores = professores;
     }
 
-    public Ideia id(Long id) {
+    public Ideia id(int id) {
         setId(id);
         return this;
     }

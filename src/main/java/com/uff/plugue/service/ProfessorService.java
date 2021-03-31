@@ -18,7 +18,7 @@ public class ProfessorService {
         dao.save(professor);
     }
 
-    public void updateProfessor(Long id, Professor professor) {
+    public void updateProfessor(int id, Professor professor) {
         professor.setId(id);
         dao.save(professor);
     }
