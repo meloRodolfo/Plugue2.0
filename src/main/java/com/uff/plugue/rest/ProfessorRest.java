@@ -30,7 +30,7 @@ public class ProfessorRest {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public boolean atualizaProfessor(@PathVariable("id") Long id, Professor professor) {
+    public boolean atualizaProfessor(@PathVariable("id") int id, Professor professor) {
 
         return professorService.updateProfessor(id, professor);
     }
