@@ -37,9 +37,7 @@ public class AlunoRest {
     @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<Aluno> busca (@PathVariable("id") int id){        
         return alunoService.getAluno(id);
-    }
-
-    
+    }    
     
     @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
