@@ -41,23 +41,8 @@ public class Professor extends Usuario{
         return this.ideias;
     }
 
-    public void setIdeias(List<Ideia> ideias) {
-        this.ideias = ideias;
-    }
-
-    public Professor id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public Professor paginaPessoal(String paginaPessoal) {
-        setPaginaPessoal(paginaPessoal);
-        return this;
-    }
-
-    public Professor ideias(List<Ideia> ideias) {
-        setIdeias(ideias);
-        return this;
+    public void setIdeias(Ideia ideia) {
+        this.ideias.add(ideia);
     }
 
     @Override
