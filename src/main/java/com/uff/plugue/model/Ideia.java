@@ -6,12 +6,14 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ideia implements Serializable {
@@ -31,21 +33,26 @@ public class Ideia implements Serializable {
     @Column
     private String descricao;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "professor_ideia",
             joinColumns = @JoinColumn(name = "fk_ideia"),
             inverseJoinColumns = @JoinColumn(name = "fk_professor"))
     private List<Professor> professores;
 
+    @ManyToOne
+    @JoinColumn(name="aluno_id")
+    private Aluno aluno;
+
     public Ideia() {
     }
 
-    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
+    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores, Aluno aluno) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
         this.descricao = descricao;
         this.professores = professores;
+        this.aluno = aluno;
     }
 
     public int getId() {
