@@ -57,5 +57,5 @@ public class ProjetoService {
 
     public List<Projeto> buscaProjetoPorTituloArea(String titulo, String areaInteresse) {
         return dao.findByTituloAndAreaInteresse(titulo, areaInteresse);
-    }    
+    }   
 }

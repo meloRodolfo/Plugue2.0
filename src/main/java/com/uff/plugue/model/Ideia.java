@@ -15,8 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Ideia")
 public class Ideia implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -40,20 +42,19 @@ public class Ideia implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "fk_professor"))
     private List<Professor> professores;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="aluno_id")
     private Aluno aluno;
 
     public Ideia() {
     }
 
-    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores, Aluno aluno) {
+    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
         this.descricao = descricao;
         this.professores = professores;
-        this.aluno = aluno;
     }
 
     public int getId() {

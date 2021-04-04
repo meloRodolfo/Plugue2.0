@@ -3,11 +3,16 @@ package com.uff.plugue.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 @Entity
@@ -19,10 +24,11 @@ public class Aluno extends Usuario {
     @Column
     private String curso;
     
-    @ManyToMany(mappedBy = "alunos")
+    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="alunos")
+    @Fetch(FetchMode.SELECT)   
     private List<Projeto> projetos;
 
-    @OneToMany(mappedBy="aluno")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="aluno")
     private List<Ideia> ideias;
 
     public Aluno() {
@@ -47,8 +53,16 @@ public class Aluno extends Usuario {
         return this.projetos;
     }
 
-    public void setProjetos(List<Projeto> projetos) {
-        this.projetos = projetos;
+    public void setProjeto(Projeto projeto) {
+        this.projetos.add(projeto);
+    }
+
+    public List<Ideia> getIdeias() {
+        return this.ideias;
+    }
+
+    public void setIdeias(List<Ideia> ideias) {
+        this.ideias = ideias;
     }
 
     public Aluno curso(String curso) {
@@ -56,8 +70,8 @@ public class Aluno extends Usuario {
         return this;
     }
 
-    public Aluno projetos(List<Projeto> projetos) {
-        setProjetos(projetos);
+    public Aluno projetos(Projeto projeto) {
+        setProjeto(projeto);
         return this;
     }
 

@@ -29,7 +29,7 @@ public class IdeiaService {
     }
 
     public List<Ideia> getIdeiaPorParametros(String areaInteresse, String titulo) {
-        if(titulo != null && areaInteresse != null) return dao.findByAreaInteresseAndTitulo(areaInteresse, titulo);
+        if (titulo != null && areaInteresse != null) return dao.findByAreaInteresseAndTitulo(areaInteresse, titulo);
         else if(titulo != null) return dao.findByTitulo(titulo);
         else return dao.findByAreaInteresse(areaInteresse);
     }
