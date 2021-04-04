@@ -32,16 +32,6 @@ public class AlunoService {
         return dao.findById(id);
     }
 
-    public void deleteAluno(int id) {
-        dao.deleteById(id);
-    }
-
-    public void login(String login, String senha) {
-        
-    }
-
-    public void logout() {}
-
     public void interessar(int idProjeto, int idAluno) {
         Optional<Projeto> projeto = projetoDao.findById(idProjeto);
         Optional<Aluno> aluno = dao.findById(idAluno);
@@ -51,5 +41,4 @@ public class AlunoService {
         projetoDao.save(proj);
     }
 
-    public void resetarSenha() {}
 }

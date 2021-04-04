@@ -2,13 +2,11 @@ package com.uff.plugue.rest;
 
 import java.util.Optional;
 
-import com.uff.plugue.model.Ideia;
 import com.uff.plugue.model.Professor;
 import com.uff.plugue.service.ProfessorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,22 +46,10 @@ public class ProfessorRest {
         return professorService.getProfessor(id);
     }
 
-    @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "Exclui professor")
-    public String excluiProfessor(@PathVariable("id") Integer id){
-        return professorService.deleteProfessor(id);
-    }
-
     @PutMapping(path = {"/{idIdeia}/{idProfessor}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Interesse professor")
     public Professor interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
         return professorService.interessar(idIdeia, idProfessor);
     }
-
-    /*@PutMapping(value = "/{id}/{senha}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Alterar senha")
-    public void alteraSenha(Integer id, String senha) {
-        professorService.resetSenha(id, senha);
-    }*/
 
 }

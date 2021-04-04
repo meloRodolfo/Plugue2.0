@@ -7,10 +7,10 @@ import com.uff.plugue.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +27,7 @@ public class UsuarioRest {
     UsuarioService usuarioService = new UsuarioService();
     
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Login usuário")
     public Usuario login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
 
         try {
@@ -36,5 +37,17 @@ public class UsuarioRest {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Alterar senha")
+    public String alteraSenha(@PathVariable("id") int id, @RequestParam("senha") String senha) {
+        return usuarioService.resetSenha(id, senha);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Excluir usuario")
+    public String excluiUsuario(@PathVariable("id") int id){
+        return usuarioService.deleteUsuario(id);
     }
 }

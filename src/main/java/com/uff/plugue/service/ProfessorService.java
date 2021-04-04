@@ -42,11 +42,6 @@ public class ProfessorService {
         return dao.findById(id);
     }
 
-    public String deleteProfessor(Integer id) {
-        dao.deleteById(id);
-        return "Apagado com sucesso";
-    }
-
     public Professor login(String login, String senha) {
         return dao.findByContatoAndSenha(login, senha);
     }
@@ -61,8 +56,4 @@ public class ProfessorService {
         return dao.findById(idProfessor).get();
     }
 
-    public void resetSenha(Integer id, String novaSenha) {
-        Optional<Professor> prof = dao.findById(id);
-        prof.get().setSenha(novaSenha);
-    }
 }
