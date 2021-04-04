@@ -2,7 +2,9 @@ package com.uff.plugue.service;
 
 import java.util.Optional;
 
+import com.uff.plugue.dao.IdeiaDAO;
 import com.uff.plugue.dao.ProfessorDAO;
+import com.uff.plugue.model.Ideia;
 import com.uff.plugue.model.Professor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class ProfessorService {
 
     @Autowired
     private ProfessorDAO dao;
+
+    @Autowired
+    private IdeiaDAO ideiaDao;
 
     public boolean addProfessor(Professor professor) {
         if (professor != null) {
@@ -37,21 +42,21 @@ public class ProfessorService {
         return dao.findById(id);
     }
 
-    public void deleteProfessor(Integer id) {
+    public String deleteProfessor(Integer id) {
         dao.deleteById(id);
+        return "Apagado com sucesso";
     }
 
-    public boolean login(String login, String senha) {
-
-        return dao.findByContato(login, senha);
+    public Professor login(String login, String senha) {
+        return dao.findByContatoAndSenha(login, senha);
     }
 
-    public boolean logout(Professor professor) {
-        return true;
-    }
+    public Professor interessar(int idIdeia, int idProfessor) {
+        Optional<Professor> prof = dao.findById(idProfessor);
+        Optional<Ideia> ideia = ideiaDao.findById(idIdeia);
 
-    public void interessar() {
-
+        prof.get().setIdeias(ideia.get());
+        return dao.findById(idProfessor).get();
     }
 
     public void resetSenha(Integer id, String novaSenha) {

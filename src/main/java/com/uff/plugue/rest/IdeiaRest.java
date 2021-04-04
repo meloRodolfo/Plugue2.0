@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/ideia")
 @Api(value = "Aluno")
-public class IdeiaRes {
+public class IdeiaRest {
 
     @Autowired
     private IdeiaService ideiaService;

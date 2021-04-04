@@ -1,5 +1,6 @@
 package com.uff.plugue.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,29 +27,36 @@ public class ProjetoRest {
     ProjetoService projetoService = new ProjetoService();
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public boolean novoProjeto(Projeto projeto) {
+    public boolean novoProjeto(@RequestBody Projeto projeto) {
         return projetoService.addProjeto(projeto);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public boolean atualizaProjeto(@PathVariable("id") Long id, Projeto projeto) {
-
+    @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean atualizaProjeto(@PathVariable("id") int id, @RequestBody Projeto projeto) {
         return projetoService.updateProjeto(id, projeto);
     }
 
-    @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Projeto> buscaProjeto(@PathVariable Integer id) {
+    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Projeto> buscaProjeto(@PathVariable int id) {
         return projetoService.getProjeto(id);
     }
 
-    @DeleteMapping(path = { "/{id}" }, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void excluiProjeto(@PathVariable Integer id) {
-        projetoService.deleteProjeto(id);
+    @DeleteMapping(path = { "/{id}" })
+    public String excluiProjeto(@PathVariable int id) {
+        return projetoService.deleteProjeto(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Projeto> listaProjetos() {
+    public List<Projeto> listaProjetos(@RequestParam(required = false) String titulo, @RequestParam(required = false) String areaInteresse) {
+        List<Projeto> projetos = new ArrayList<>();
+        if(titulo != null && areaInteresse != null) {
+            projetos.addAll(projetoService.buscaProjetoPorTituloArea(titulo, areaInteresse)) ;
+        } else if(titulo != null) {
+            projetos.addAll(projetoService.buscaProjetoPorTitulo(titulo));
+        } else {
+            projetos.addAll(projetoService.buscaProjetoPorArea(areaInteresse));
+        }
 
-        return projetoService.listarProjetos();
+        return projetos;
     }
 }

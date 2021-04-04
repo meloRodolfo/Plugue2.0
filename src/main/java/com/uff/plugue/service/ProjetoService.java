@@ -24,8 +24,8 @@ public class ProjetoService {
         
     }
 
-    public boolean updateProjeto(Long id, Projeto projeto) {
-        if(id != null && projeto != null) {
+    public boolean updateProjeto(int id, Projeto projeto) {
+        if(id != 0 && projeto != null) {
             projeto.setId(id);
             dao.save(projeto);
             return true;
@@ -33,16 +33,29 @@ public class ProjetoService {
         return false;
     }
 
-    public Optional<Projeto> getProjeto(Integer id) {
+    public Optional<Projeto> getProjeto(int id) {
         return dao.findById(id);
     }
 
-    public void deleteProjeto(Integer id) {
+    public String deleteProjeto(int id) {
         dao.deleteById(id);
+        return "Apagado com sucesso";
     }
 
     public List<Projeto> listarProjetos() {
 
         return dao.findAll();
     }
+
+    public List<Projeto> buscaProjetoPorTitulo(String titulo) {
+        return dao.findByTitulo(titulo);
+    }
+
+    public List<Projeto> buscaProjetoPorArea(String areaInteresse) {
+        return dao.findByAreaInteresse(areaInteresse);
+    }
+
+    public List<Projeto> buscaProjetoPorTituloArea(String titulo, String areaInteresse) {
+        return dao.findByTituloAndAreaInteresse(titulo, areaInteresse);
+    }    
 }

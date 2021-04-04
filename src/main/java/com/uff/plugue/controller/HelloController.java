@@ -67,6 +67,7 @@ public class HelloController {
         //ideiaService.addIdeia(ideia);
         //alunoService.addAluno(aluno);
         //projetoService.addProjeto(projeto);*/
+        
 
         return "Hello Word";
     }
