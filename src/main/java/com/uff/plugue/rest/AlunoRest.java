@@ -3,12 +3,14 @@ package com.uff.plugue.rest;
 import java.util.Optional;
 
 import com.uff.plugue.model.Aluno;
+import com.uff.plugue.model.Projeto;
 import com.uff.plugue.service.AlunoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class AlunoRest {
     @Autowired
     private AlunoService alunoService;  
     
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Salva aluno")
     public void salvar(@RequestBody Aluno aluno) {
         alunoService.addAluno(aluno);
@@ -46,17 +48,15 @@ public class AlunoRest {
         return alunoService.getAluno(id);
     }    
     
-    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Atualiza aluno")
-    public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
-        alunoService.updateAluno(id, aluno);
-    }
+    // @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    // @ApiOperation(value = "Atualiza aluno")
+    // public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
+    //     alunoService.updateAluno(id, aluno);
+    // }
 
-    @PutMapping(path = {"/{idProjeto}/{idAluno}"})
+    @PutMapping(path = {"/{idAluno}/projeto/{idProjeto}"})
     @ApiOperation(value = "Interesse aluno")
-    public Aluno interessar(@PathVariable("idProjeto") int idProjeto, @PathVariable("idAluno") int idAluno) {
-        return null;
+    public void interessar(@PathVariable("idAluno") int idAluno, @PathVariable("idProjeto") int idProjeto) {
+        alunoService.interessar(idProjeto, idAluno);
     }
-
-    
 }

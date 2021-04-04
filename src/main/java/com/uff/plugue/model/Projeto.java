@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Projeto implements Serializable {
     @Column
     private String descricao;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "aluno_projeto",
             joinColumns = @JoinColumn(name = "fk_projeto"),
             inverseJoinColumns = @JoinColumn(name = "fk_aluno"))
@@ -84,8 +85,8 @@ public class Projeto implements Serializable {
         return this.alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
+    public void setAluno(Aluno aluno) {
+        this.alunos.add(aluno);
     }
 
     @Override

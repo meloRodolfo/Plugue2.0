@@ -2,7 +2,6 @@ package com.uff.plugue.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.uff.plugue.model.Ideia;
 import com.uff.plugue.service.IdeiaService;
@@ -44,7 +43,10 @@ public class IdeiaRest {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Lista ideias")
-    public List<Ideia> listaIdeias (@RequestParam(required = false) String titulo, @RequestParam(required = false) String areaInteresse){  
+    public List<Ideia> listaIdeias (
+        @RequestParam(required = false) String titulo, 
+        @RequestParam(required = false) String areaInteresse
+    ){  
         List<Ideia> ideias = new ArrayList<Ideia>();
         ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo));
 
