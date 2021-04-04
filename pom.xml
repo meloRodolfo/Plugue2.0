@@ -72,11 +72,10 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<version>2.10.5</version>
 		</dependency>
-		
-	</dependencies>
 
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -91,6 +90,12 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
 		</plugins>
 	</build>
 </project>
