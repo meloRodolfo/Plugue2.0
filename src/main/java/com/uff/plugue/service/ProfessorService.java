@@ -51,12 +51,13 @@ public class ProfessorService {
         return dao.findByContatoAndSenha(login, senha);
     }
 
-    public Professor interessar(int idIdeia, int idProfessor) {
-        Optional<Professor> prof = dao.findById(idProfessor);
+    public void interessar(int idIdeia, int idProfessor) {
+        Optional<Professor> professor = dao.findById(idProfessor);
         Optional<Ideia> ideia = ideiaDao.findById(idIdeia);
 
-        prof.get().setIdeias(ideia.get());
-        return dao.findById(idProfessor).get();
+        Ideia ideiaInteresse = ideia.get();
+        ideiaInteresse.setProfessor(professor.get());
+        ideiaDao.save(ideiaInteresse);
     }
 
     public void resetSenha(Integer id, String novaSenha) {

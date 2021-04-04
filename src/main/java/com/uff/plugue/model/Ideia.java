@@ -42,18 +42,19 @@ public class Ideia implements Serializable {
     private List<Professor> professores;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="aluno_id")
+    @JoinColumn(name="aluno_id", nullable = false)
     private Aluno aluno;
 
     public Ideia() {
     }
 
-    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
+    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores, Aluno aluno) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
         this.descricao = descricao;
         this.professores = professores;
+        this.aluno = aluno;
     }
 
     public int getId() {
@@ -92,8 +93,16 @@ public class Ideia implements Serializable {
         return this.professores;
     }
 
-    public void setProfessores(List<Professor> professores) {
-        this.professores = professores;
+    public void setProfessor(Professor professor) {
+        this.professores.add(professor);
+    }
+
+    public Aluno getaluno() {
+        return this.aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     public Ideia id(int id) {
@@ -116,8 +125,8 @@ public class Ideia implements Serializable {
         return this;
     }
 
-    public Ideia professores(List<Professor> professores) {
-        setProfessores(professores);
+    public Ideia professores(Professor professores) {
+        setProfessor(professores);
         return this;
     }
 
