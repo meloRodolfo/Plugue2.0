@@ -46,10 +46,10 @@ public class ProfessorRest {
         return professorService.getProfessor(id);
     }
 
-    @PutMapping(path = {"/{idIdeia}/{idProfessor}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = {"/{idProfessor}/ideia/{idIdeia}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Interesse professor")
-    public Professor interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
-        return professorService.interessar(idIdeia, idProfessor);
+    public void interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
+        professorService.interessar(idIdeia, idProfessor);
     }
 
 }
