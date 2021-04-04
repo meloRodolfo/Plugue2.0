@@ -2,7 +2,6 @@ package com.uff.plugue.rest;
 
 import java.util.Optional;
 
-
 import com.uff.plugue.model.Aluno;
 import com.uff.plugue.service.AlunoService;
 
