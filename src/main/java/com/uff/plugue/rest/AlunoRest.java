@@ -36,7 +36,7 @@ public class AlunoRest {
     }
 
     @DeleteMapping(path ={"/{id}"})
-    @ApiOperation(value = "Deleta aluno")
+    @ApiOperation(value = "Exclui aluno")
     public void deletar (@PathVariable("id") int id){
         alunoService.deleteAluno(id);
     }
@@ -51,6 +51,12 @@ public class AlunoRest {
     @ApiOperation(value = "Atualiza aluno")
     public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
         alunoService.updateAluno(id, aluno);
+    }
+
+    @PutMapping(path = {"/{idProjeto}/{idAluno}"})
+    @ApiOperation(value = "Interesse aluno")
+    public Aluno interessar(@PathVariable("idProjeto") int idProjeto, @PathVariable("idAluno") int idAluno) {
+        return null;
     }
 
     

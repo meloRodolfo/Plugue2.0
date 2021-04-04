@@ -19,34 +19,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/projeto")
+@Api(value = "Projeto")
 public class ProjetoRest {
 
     @Autowired
     ProjetoService projetoService = new ProjetoService();
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Novo projeto")
     public boolean novoProjeto(@RequestBody Projeto projeto) {
         return projetoService.addProjeto(projeto);
     }
 
     @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Atualiza projeto")
     public boolean atualizaProjeto(@PathVariable("id") int id, @RequestBody Projeto projeto) {
         return projetoService.updateProjeto(id, projeto);
     }
 
     @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "busca projeto")
     public Optional<Projeto> buscaProjeto(@PathVariable int id) {
         return projetoService.getProjeto(id);
     }
 
     @DeleteMapping(path = { "/{id}" })
+    @ApiOperation(value = "Exlcui projeto")
     public String excluiProjeto(@PathVariable int id) {
         return projetoService.deleteProjeto(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Lista projetos")
     public List<Projeto> listaProjetos(@RequestParam(required = false) String titulo, @RequestParam(required = false) String areaInteresse) {
         List<Projeto> projetos = new ArrayList<>();
         if(titulo != null && areaInteresse != null) {
