@@ -1,5 +1,6 @@
 package com.uff.plugue.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.uff.plugue.dao.IdeiaDAO;
@@ -23,8 +24,14 @@ public class IdeiaService {
         dao.save(ideia);
     }
 
-    public Optional<Ideia> getIdeia(Integer id) {
-        return dao.findById(id);
+    public List<Ideia> getIdeias() {
+        return dao.findAll();
+    }
+
+    public List<Ideia> getIdeiaPorParametros(String areaInteresse, String titulo) {
+        if(titulo != null && areaInteresse != null) return dao.findByAreaInteresseAndTitulo(areaInteresse, titulo);
+        else if(titulo != null) return dao.findByTitulo(titulo);
+        else return dao.findByAreaInteresse(areaInteresse);
     }
 
     public void deleteIdeia(Integer id) {

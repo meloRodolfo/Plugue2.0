@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 
@@ -21,13 +22,17 @@ public class Aluno extends Usuario {
     @ManyToMany(mappedBy = "alunos")
     private List<Projeto> projetos;
 
+    @OneToMany(mappedBy="aluno")
+    private List<Ideia> ideias;
+
     public Aluno() {
     }
 
-    public Aluno(int id, String nome, String contato, String senha, String curso, List<Projeto> projetos) {
+    public Aluno(int id, String nome, String contato, String senha, String curso, List<Projeto> projetos, List<Ideia> ideias) {
         super(id, nome, contato, senha);
         this.curso = curso;
         this.projetos = projetos;
+        this.ideias = ideias;
     }
 
     public String getCurso() {

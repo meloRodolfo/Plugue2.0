@@ -1,5 +1,7 @@
 package com.uff.plugue.rest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.uff.plugue.model.Ideia;
@@ -10,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -26,7 +30,7 @@ public class IdeiaRest {
     @Autowired
     private IdeiaService ideiaService;
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Salva ideia")
     public void salvar(@RequestBody Ideia ideia) {
         ideiaService.addIdeia(ideia);
@@ -38,10 +42,14 @@ public class IdeiaRest {
         ideiaService.updateIdeia(id, ideia);
     }
 
-    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Busca ideia")
-    public Optional<Ideia> busca (@PathVariable("id") int id){        
-        return ideiaService.getIdeia(id);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Lista ideias")
+    public List<Ideia> listaIdeias (@RequestParam(required = false) String titulo, @RequestParam(required = false) String areaInteresse){  
+        List<Ideia> ideias = new ArrayList<Ideia>();
+        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo));
+
+        if(titulo == null && areaInteresse == null) return ideiaService.getIdeias();
+        return ideias;      
     }
 
     @DeleteMapping(path ={"/{id}"})

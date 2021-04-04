@@ -45,9 +45,7 @@ public class AlunoRest {
     @ApiOperation(value = "Busca aluno")
     public Optional<Aluno> busca (@PathVariable("id") int id){        
         return alunoService.getAluno(id);
-    }
-
-    
+    }    
     
     @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Atualiza aluno")
