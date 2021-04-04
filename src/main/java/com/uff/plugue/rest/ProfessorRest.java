@@ -28,12 +28,12 @@ public class ProfessorRest {
     @Autowired
     ProfessorService professorService = new ProfessorService();
 
-    /*@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Novo professor")
     public boolean novoProfessor(@RequestBody Professor professor) {
         
         return professorService.addProfessor(professor);
-    }*/
+    }
 
     @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Atualiza professor")
@@ -53,12 +53,6 @@ public class ProfessorRest {
     public String excluiProfessor(@PathVariable("id") Integer id){
         return professorService.deleteProfessor(id);
     }
-
-    /*@GetMapping(path = {"/{login}/{senha}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Professor loginProfessor(@PathVariable("login") String login, @PathVariable("senha") String senha) {
-
-        return professorService.login(login, senha);
-    }*/
 
     @PutMapping(path = {"/{idIdeia}/{idProfessor}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Interesse professor")

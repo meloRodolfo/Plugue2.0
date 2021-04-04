@@ -3,8 +3,10 @@ package com.uff.plugue.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -17,7 +19,7 @@ public class Professor extends Usuario{
     @Column
     private String paginaPessoal;
 
-    @ManyToMany(mappedBy="professores")
+    @ManyToMany(mappedBy="professores", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Ideia> ideias;
 
     public Professor() {

@@ -56,6 +56,8 @@ public class ProfessorService {
         Optional<Ideia> ideia = ideiaDao.findById(idIdeia);
 
         prof.get().setIdeias(ideia.get());
+        dao.save(prof.get());
+        dao.flush();
         return dao.findById(idProfessor).get();
     }
 
