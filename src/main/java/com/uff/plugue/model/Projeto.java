@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Projeto implements Serializable {
 
@@ -33,12 +35,14 @@ public class Projeto implements Serializable {
     @Column
     private String descricao;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "aluno_projeto",
             joinColumns = @JoinColumn(name = "fk_projeto"),
             inverseJoinColumns = @JoinColumn(name = "fk_aluno"))
     private List<Aluno> alunos;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="professor_id", nullable = false)
     private Professor professor;
