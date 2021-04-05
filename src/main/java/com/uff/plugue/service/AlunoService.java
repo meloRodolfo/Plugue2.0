@@ -40,5 +40,4 @@ public class AlunoService {
         proj.setAluno(aluno.get());
         projetoDao.save(proj);
     }
-
 }
