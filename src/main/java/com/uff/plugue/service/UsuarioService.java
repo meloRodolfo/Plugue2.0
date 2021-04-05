@@ -37,4 +37,5 @@ public class UsuarioService {
         dao.deleteById(id);
         return "Usuário deletado com sucesso";
     }
+    
 }
