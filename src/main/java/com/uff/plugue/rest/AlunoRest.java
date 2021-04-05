@@ -28,25 +28,25 @@ public class AlunoRest {
     private AlunoService alunoService;  
     
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Salva aluno")
+    @ApiOperation(value = "Salva um aluno")
     public void salvar(@RequestBody Aluno aluno) {
         alunoService.addAluno(aluno);
     }
     
     @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Busca aluno")
+    @ApiOperation(value = "Busca um aluno")
     public Optional<Aluno> busca (@PathVariable("id") int id){        
         return alunoService.getAluno(id);
     }    
     
     @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Atualiza aluno")
+    @ApiOperation(value = "Atualiza um aluno")
     public void atualizar(@PathVariable("id") int id, @RequestBody Aluno aluno) {
         alunoService.updateAluno(id, aluno);
     }
 
     @PutMapping(path = {"/{idAluno}/projeto/{idProjeto}"})
-    @ApiOperation(value = "Interesse aluno")
+    @ApiOperation(value = "Informa interesse de aluno em um projeto")
     public void interessar(@PathVariable("idAluno") int idAluno, @PathVariable("idProjeto") int idProjeto) {
         alunoService.interessar(idProjeto, idAluno);
     }

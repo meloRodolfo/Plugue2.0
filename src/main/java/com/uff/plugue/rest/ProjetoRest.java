@@ -49,7 +49,7 @@ public class ProjetoRest {
     }
 
     @DeleteMapping(path = { "/{id}" })
-    @ApiOperation(value = "Exlcui projeto")
+    @ApiOperation(value = "Exclui projeto")
     public String excluiProjeto(@PathVariable int id) {
         return projetoService.deleteProjeto(id);
     }

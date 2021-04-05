@@ -30,13 +30,13 @@ public class IdeiaRest {
     private IdeiaService ideiaService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Nova ideia")
+    @ApiOperation(value = "Cria uma nova ideia")
     public void salvar(@RequestBody Ideia ideia) {
         ideiaService.addIdeia(ideia);
     }
 
     @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Atualiza ideia")
+    @ApiOperation(value = "Atualiza uma ideia")
     public void atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
         ideiaService.updateIdeia(id, ideia);
     }
@@ -55,7 +55,7 @@ public class IdeiaRest {
     }
 
     @DeleteMapping(path ={"/{id}"})
-    @ApiOperation(value = "Exclui ideia")
+    @ApiOperation(value = "Exclui uma ideia")
     public void deletar (@PathVariable("id") int id){
         ideiaService.deleteIdeia(id);
     }

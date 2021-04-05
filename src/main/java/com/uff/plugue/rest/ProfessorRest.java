@@ -34,20 +34,20 @@ public class ProfessorRest {
     }
 
     @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Atualiza professor")
+    @ApiOperation(value = "Atualiza um professor")
     public boolean atualizaProfessor( @PathVariable("id") int id, @RequestBody Professor professor) {
 
         return professorService.updateProfessor(id, professor);
     }
 
     @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Busca professor")
+    @ApiOperation(value = "Busca por um professor")
     public Optional<Professor> buscaProfessor(@PathVariable("id") Integer id){
         return professorService.getProfessor(id);
     }
 
     @PutMapping(path = {"/{idProfessor}/ideia/{idIdeia}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Interesse professor")
+    @ApiOperation(value = "Informa interesse de professor em uma ideia")
     public void interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
         professorService.interessar(idIdeia, idProfessor);
     }
