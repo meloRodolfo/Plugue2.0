@@ -1,7 +1,6 @@
 package com.uff.plugue.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.uff.plugue.dao.IdeiaDAO;
 import com.uff.plugue.model.Ideia;
