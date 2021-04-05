@@ -44,7 +44,7 @@ public class Projeto implements Serializable {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="professor_id", nullable = false)
+    @JoinColumn(name="professor_id")
     private Professor professor;
 
     public Projeto() {
