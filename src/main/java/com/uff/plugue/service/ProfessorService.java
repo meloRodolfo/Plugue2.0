@@ -1,7 +1,5 @@
 package com.uff.plugue.service;
 
-import java.util.Optional;
-
 import com.uff.plugue.dao.IdeiaDAO;
 import com.uff.plugue.dao.ProfessorDAO;
 import com.uff.plugue.model.Ideia;
@@ -19,40 +17,30 @@ public class ProfessorService {
     @Autowired
     private IdeiaDAO ideiaDao;
 
-    public boolean addProfessor(Professor professor) {
-        if (professor != null) {
-            dao.save(professor);
-            return true;
-        }
-        return false;
+    public Professor addProfessor(Professor professor) {
+        dao.save(professor);
+        return dao.findByContato(professor.getContato()).get();
+    }
+
+    public Professor updateProfessor(int id, Professor professor) {
+        professor.setId(id);
+        dao.save(professor);
+        return dao.findByContato(professor.getContato()).get();
 
     }
 
-    public boolean updateProfessor(int id, Professor professor) {
-        if (id != 0 && professor != null) {
-            professor.setId(id);
-            dao.save(professor);
-            return true;
-        }
-        return false;
-
+    public Professor getProfessor(Integer id) {
+        return dao.findById(id).get();
     }
 
-    public Optional<Professor> getProfessor(Integer id) {
-        return dao.findById(id);
-    }
+    public Ideia interessar(int idIdeia, int idProfessor) {
+        Professor professor = dao.findById(idProfessor).get();
+        Ideia ideia = ideiaDao.findById(idIdeia).get();
 
-    public Professor login(String login, String senha) {
-        return dao.findByContatoAndSenha(login, senha);
-    }
-
-    public void interessar(int idIdeia, int idProfessor) {
-        Optional<Professor> professor = dao.findById(idProfessor);
-        Optional<Ideia> ideia = ideiaDao.findById(idIdeia);
-
-        Ideia ideiaInteresse = ideia.get();
-        ideiaInteresse.setProfessor(professor.get());
+        Ideia ideiaInteresse = ideia;
+        ideiaInteresse.setProfessor(professor);
         ideiaDao.save(ideiaInteresse);
+        return ideia;
     }
 
 }

@@ -1,7 +1,5 @@
 package com.uff.plugue.service;
 
-import java.util.Optional;
-
 import com.uff.plugue.dao.AlunoDAO;
 import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Aluno;
@@ -19,26 +17,29 @@ public class AlunoService {
     @Autowired
     private ProjetoDAO projetoDao;
 
-    public void addAluno(Aluno aluno) {
+    public Aluno addAluno(Aluno aluno) {
         dao.save(aluno);
+        return dao.findByContato(aluno.getContato()).get();
     }
 
-    public void updateAluno(int id, Aluno aluno) {
+    public Aluno updateAluno(int id, Aluno aluno) {
         aluno.setId(id);
         dao.save(aluno);
+        return dao.findById(id).get();
     }
 
-    public Optional<Aluno> getAluno(int id) {
-        return dao.findById(id);
+    public Aluno getAluno(int id) {
+        return dao.findById(id).get();
     }
 
-    public void interessar(int idProjeto, int idAluno) {
-        Optional<Projeto> projeto = projetoDao.findById(idProjeto);
-        Optional<Aluno> aluno = dao.findById(idAluno);
+    public Aluno interessar(int idProjeto, int idAluno) {
+        Projeto projeto = projetoDao.findById(idProjeto).get();
+        Aluno aluno = dao.findById(idAluno).get();
 
-        Projeto proj = projeto.get();
-        proj.setAluno(aluno.get());
+        Projeto proj = projeto;
+        proj.setAluno(aluno);
         projetoDao.save(proj);
+        return aluno;
     }
 
 }

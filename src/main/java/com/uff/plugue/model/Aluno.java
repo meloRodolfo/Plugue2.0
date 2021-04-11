@@ -11,12 +11,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class, 
+    property = "id")
 public class Aluno extends Usuario {
 
     private static final long serialVersionUID = 1L;

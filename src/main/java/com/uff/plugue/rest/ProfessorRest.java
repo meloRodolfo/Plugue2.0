@@ -1,12 +1,10 @@
 package com.uff.plugue.rest;
 
-import java.util.Optional;
-
+import com.uff.plugue.model.Ideia;
 import com.uff.plugue.model.Professor;
 import com.uff.plugue.service.ProfessorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,30 +24,31 @@ public class ProfessorRest {
     @Autowired
     ProfessorService professorService = new ProfessorService();
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ApiOperation(value = "Novo professor")
-    public boolean novoProfessor(@RequestBody Professor professor) {
+    public Professor novoProfessor(@RequestBody Professor professor) {
         
         return professorService.addProfessor(professor);
     }
 
-    @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = {"/{id}"})
     @ApiOperation(value = "Atualiza um professor")
-    public boolean atualizaProfessor( @PathVariable("id") int id, @RequestBody Professor professor) {
+    public Professor atualizaProfessor(@PathVariable("id") int id, @RequestBody Professor professor) {
 
         return professorService.updateProfessor(id, professor);
     }
 
-    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = {"/{id}"})
     @ApiOperation(value = "Busca por um professor")
-    public Optional<Professor> buscaProfessor(@PathVariable("id") Integer id){
+    public Professor buscaProfessor(@PathVariable("id") Integer id){
+        
         return professorService.getProfessor(id);
     }
 
-    @PutMapping(path = {"/{idProfessor}/ideia/{idIdeia}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = {"/{idProfessor}/ideia/{idIdeia}"})
     @ApiOperation(value = "Informa interesse de professor em uma ideia")
-    public void interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
-        professorService.interessar(idIdeia, idProfessor);
+    public Ideia interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
+        return professorService.interessar(idIdeia, idProfessor);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.uff.plugue.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Projeto;
@@ -15,26 +14,20 @@ public class ProjetoService {
     @Autowired
     private ProjetoDAO dao;
 
-    public boolean addProjeto(Projeto projeto) {
-        if(projeto != null) {
+    public Projeto addProjeto(Projeto projeto) {
             dao.save(projeto);
-            return true;
-        }
-        return false;
+            return dao.findByAreaInteresseAndTitulo(projeto.getTitulo(), projeto.getAreaInteresse()).get();
         
     }
 
-    public boolean updateProjeto(int id, Projeto projeto) {
-        if(id != 0 && projeto != null) {
+    public Projeto updateProjeto(int id, Projeto projeto) {
             projeto.setId(id);
             dao.save(projeto);
-            return true;
-        }
-        return false;
+            return dao.findById(id).get();
     }
 
-    public Optional<Projeto> getProjeto(int id) {
-        return dao.findById(id);
+    public Projeto getProjeto(int id) {
+        return dao.findById(id).get();
     }
 
     public String deleteProjeto(int id) {

@@ -6,7 +6,6 @@ import com.uff.plugue.model.Usuario;
 import com.uff.plugue.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +25,7 @@ public class UsuarioRest {
     @Autowired
     UsuarioService usuarioService = new UsuarioService();
     
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     @ApiOperation(value = "Login usuário")
     public Usuario login(@RequestParam("login") String login, @RequestParam("senha") String senha) {
 
@@ -39,7 +38,7 @@ public class UsuarioRest {
         return null;
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     @ApiOperation(value = "Alterar senha")
     public String alteraSenha(@PathVariable("id") int id, @RequestParam("senha") String senha) {
         return usuarioService.resetSenha(id, senha);

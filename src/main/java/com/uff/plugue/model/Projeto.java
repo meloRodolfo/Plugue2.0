@@ -15,9 +15,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class, 
+        property = "id")
 public class Projeto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,15 +38,13 @@ public class Projeto implements Serializable {
 
     @Column
     private String descricao;
-
-    @JsonIgnore
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "aluno_projeto",
             joinColumns = @JoinColumn(name = "fk_projeto"),
             inverseJoinColumns = @JoinColumn(name = "fk_aluno"))
     private List<Aluno> alunos;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="professor_id", nullable = false)
     private Professor professor;
