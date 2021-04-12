@@ -2,7 +2,6 @@ package com.uff.plugue.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.uff.plugue.model.Projeto;
 import com.uff.plugue.service.ProjetoService;
@@ -30,21 +29,21 @@ public class ProjetoRest {
     @Autowired
     ProjetoService projetoService = new ProjetoService();
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ApiOperation(value = "Novo projeto")
-    public boolean novoProjeto(@RequestBody Projeto projeto) {
+    public Projeto novoProjeto(@RequestBody Projeto projeto) {
         return projetoService.addProjeto(projeto);
     }
 
-    @PutMapping(path = {"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = {"/{id}"})
     @ApiOperation(value = "Atualiza projeto")
-    public boolean atualizaProjeto(@PathVariable("id") int id, @RequestBody Projeto projeto) {
+    public Projeto atualizaProjeto(@PathVariable("id") int id, @RequestBody Projeto projeto) {
         return projetoService.updateProjeto(id, projeto);
     }
 
     @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "busca projeto")
-    public Optional<Projeto> buscaProjeto(@PathVariable int id) {
+    public Projeto buscaProjeto(@PathVariable int id) {
         return projetoService.getProjeto(id);
     }
 
@@ -54,9 +53,10 @@ public class ProjetoRest {
         return projetoService.deleteProjeto(id);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     @ApiOperation(value = "Lista projetos")
-    public List<Projeto> listaProjetos(@RequestParam(required = false) String titulo, @RequestParam(required = false) String areaInteresse) {
+    public List<Projeto> listaProjetos(@RequestParam(required = false) String titulo, 
+                                       @RequestParam(required = false) String areaInteresse) {
         List<Projeto> projetos = new ArrayList<>();
         if(titulo != null && areaInteresse != null) {
             projetos.addAll(projetoService.buscaProjetoPorTituloArea(titulo, areaInteresse)) ;

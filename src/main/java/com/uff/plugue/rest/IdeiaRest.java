@@ -7,7 +7,6 @@ import com.uff.plugue.model.Ideia;
 import com.uff.plugue.service.IdeiaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,19 +28,19 @@ public class IdeiaRest {
     @Autowired
     private IdeiaService ideiaService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ApiOperation(value = "Cria uma nova ideia")
-    public void salvar(@RequestBody Ideia ideia) {
-        ideiaService.addIdeia(ideia);
+    public Ideia salvar(@RequestBody Ideia ideia) {
+        return ideiaService.addIdeia(ideia);
     }
 
-    @PutMapping(path ={"/{id}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path ={"/{id}"})
     @ApiOperation(value = "Atualiza uma ideia")
-    public void atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
-        ideiaService.updateIdeia(id, ideia);
+    public Ideia atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
+        return ideiaService.updateIdeia(id, ideia);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     @ApiOperation(value = "Lista ideias")
     public List<Ideia> listaIdeias (
         @RequestParam(required = false) String titulo, 
@@ -56,8 +55,8 @@ public class IdeiaRest {
 
     @DeleteMapping(path ={"/{id}"})
     @ApiOperation(value = "Exclui uma ideia")
-    public void deletar (@PathVariable("id") int id){
-        ideiaService.deleteIdeia(id);
+    public String deletar (@PathVariable("id") int id){
+        return ideiaService.deleteIdeia(id);
     }
 }
     

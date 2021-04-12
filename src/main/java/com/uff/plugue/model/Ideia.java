@@ -17,7 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="Ideia")
@@ -37,15 +38,16 @@ public class Ideia implements Serializable {
 
     @Column
     private String descricao;
-
-    @JsonIgnore
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "professor_ideia",
             joinColumns = @JoinColumn(name = "fk_ideia"),
             inverseJoinColumns = @JoinColumn(name = "fk_professor"))
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class, 
+            property = "id")
     private List<Professor> professores;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="aluno_id")
     private Aluno aluno;

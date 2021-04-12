@@ -1,6 +1,7 @@
 package com.uff.plugue.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.uff.plugue.model.Ideia;
 
@@ -12,4 +13,5 @@ public interface IdeiaDAO extends JpaRepository<Ideia, Integer>{
     List<Ideia> findByTitulo(String titulo);
     List<Ideia> findByAreaInteresse(String areaInteresse);
     List<Ideia> findByAreaInteresseAndTitulo(String areaInteresse, String titulo);
+    Optional<Ideia> findByTituloAndAreaInteresse(String areaInteresse, String titulo);
 }
