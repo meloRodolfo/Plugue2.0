@@ -3,13 +3,25 @@ package com.uff.plugue.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class, 
+    property = "id")
 public class Professor extends Usuario{
     
     private static final long serialVersionUID = 1L;
@@ -17,16 +29,21 @@ public class Professor extends Usuario{
     @Column
     private String paginaPessoal;
 
-    @ManyToMany(mappedBy="professores")
+    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="professores")
+    @Fetch(FetchMode.SELECT)  
     private List<Ideia> ideias;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="professor")
+    private List<Projeto> projetos;
 
     public Professor() {
     }
 
-    public Professor(int id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias) {
+    public Professor(int id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias, List<Projeto> projetos) {
         super(id, nome, contato, senha);
         this.paginaPessoal = paginaPessoal;
         this.ideias = ideias;
+        this.projetos = projetos;
     }
 
     public String getPaginaPessoal() {
@@ -41,23 +58,16 @@ public class Professor extends Usuario{
         return this.ideias;
     }
 
-    public void setIdeias(List<Ideia> ideias) {
-        this.ideias = ideias;
+    public void setIdeia(Ideia ideia) {
+        this.ideias.add(ideia);
     }
 
-    public Professor id(int id) {
-        setId(id);
-        return this;
+    public List<Projeto> getProjetos() {
+        return this.projetos;
     }
 
-    public Professor paginaPessoal(String paginaPessoal) {
-        setPaginaPessoal(paginaPessoal);
-        return this;
-    }
-
-    public Professor ideias(List<Ideia> ideias) {
-        setIdeias(ideias);
-        return this;
+    public void setProjeto(Projeto projeto) {
+        this.projetos.add(projeto);
     }
 
     @Override

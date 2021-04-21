@@ -4,16 +4,24 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name="Ideia")
 public class Ideia implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -30,22 +38,30 @@ public class Ideia implements Serializable {
 
     @Column
     private String descricao;
-
-    @ManyToMany
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "professor_ideia",
             joinColumns = @JoinColumn(name = "fk_ideia"),
             inverseJoinColumns = @JoinColumn(name = "fk_professor"))
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class, 
+            property = "id")
     private List<Professor> professores;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="aluno_id", nullable = false)
+    private Aluno aluno;
 
     public Ideia() {
     }
 
-    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores) {
+    public Ideia(int id, String titulo, String areaInteresse, String descricao, List<Professor> professores, Aluno aluno) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
         this.descricao = descricao;
         this.professores = professores;
+        this.aluno = aluno;
     }
 
     public int getId() {
@@ -84,8 +100,16 @@ public class Ideia implements Serializable {
         return this.professores;
     }
 
-    public void setProfessores(List<Professor> professores) {
-        this.professores = professores;
+    public void setProfessor(Professor professor) {
+        this.professores.add(professor);
+    }
+
+    public Aluno getaluno() {
+        return this.aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     public Ideia id(int id) {
@@ -108,8 +132,8 @@ public class Ideia implements Serializable {
         return this;
     }
 
-    public Ideia professores(List<Professor> professores) {
-        setProfessores(professores);
+    public Ideia professores(Professor professores) {
+        setProfessor(professores);
         return this;
     }
 

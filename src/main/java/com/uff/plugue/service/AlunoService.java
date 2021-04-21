@@ -1,9 +1,9 @@
 package com.uff.plugue.service;
 
-import java.util.Optional;
-
 import com.uff.plugue.dao.AlunoDAO;
+import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Aluno;
+import com.uff.plugue.model.Projeto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,30 +14,32 @@ public class AlunoService {
     @Autowired
     private AlunoDAO dao;
 
-    public void addAluno(Aluno aluno) {
+    @Autowired
+    private ProjetoDAO projetoDao;
+
+    public Aluno addAluno(Aluno aluno) {
         dao.save(aluno);
+        return dao.findByContato(aluno.getContato()).get();
     }
 
-    public void updateAluno(int id, Aluno aluno) {
+    public Aluno updateAluno(int id, Aluno aluno) {
         aluno.setId(id);
         dao.save(aluno);
+        return dao.findById(id).get();
     }
 
-    public Optional<Aluno> getAluno(int id) {
-        return dao.findById(id);
+    public Aluno getAluno(int id) {
+        return dao.findById(id).get();
     }
 
-    public void deleteAluno(int id) {
-        dao.deleteById(id);
+    public Aluno interessar(int idProjeto, int idAluno) {
+        Projeto projeto = projetoDao.findById(idProjeto).get();
+        Aluno aluno = dao.findById(idAluno).get();
+
+        Projeto proj = projeto;
+        proj.setAluno(aluno);
+        projetoDao.save(proj);
+        return aluno;
     }
 
-    public void login(String login, String senha) {
-        
-    }
-
-    public void logout() {}
-
-    public void resetarSenha() {}
-
-    public void interessar() {}
 }

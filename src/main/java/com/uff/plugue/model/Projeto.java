@@ -6,21 +6,29 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class, 
+        property = "id")
 public class Projeto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Column
     private String titulo;
@@ -29,30 +37,35 @@ public class Projeto implements Serializable {
     private String areaInteresse;
 
     @Column
-    private String desccricao;
-
-    @ManyToMany
+    private String descricao;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "aluno_projeto",
             joinColumns = @JoinColumn(name = "fk_projeto"),
             inverseJoinColumns = @JoinColumn(name = "fk_aluno"))
     private List<Aluno> alunos;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="professor_id", nullable = false)
+    private Professor professor;
+
     public Projeto() {
     }
 
-    public Projeto(Long id, String titulo, String areaInteresse, String desccricao, List<Aluno> alunos) {
+    public Projeto(int id, String titulo, String areaInteresse, String descricao, List<Aluno> alunos, Professor professor) {
         this.id = id;
         this.titulo = titulo;
         this.areaInteresse = areaInteresse;
-        this.desccricao = desccricao;
+        this.descricao = descricao;
         this.alunos = alunos;
+        this.professor = professor;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -72,45 +85,28 @@ public class Projeto implements Serializable {
         this.areaInteresse = areaInteresse;
     }
 
-    public String getDesccricao() {
-        return this.desccricao;
+    public String getDescricao() {
+        return this.descricao;
     }
 
-    public void setDesccricao(String desccricao) {
-        this.desccricao = desccricao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public List<Aluno> getAlunos() {
         return this.alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
+    public void setAluno(Aluno aluno) {
+        this.alunos.add(aluno);
     }
 
-    public Projeto id(Long id) {
-        setId(id);
-        return this;
+    public Professor getProfessor() {
+        return this.professor;
     }
 
-    public Projeto titulo(String titulo) {
-        setTitulo(titulo);
-        return this;
-    }
-
-    public Projeto areaInteresse(String areaInteresse) {
-        setAreaInteresse(areaInteresse);
-        return this;
-    }
-
-    public Projeto desccricao(String desccricao) {
-        setDesccricao(desccricao);
-        return this;
-    }
-
-    public Projeto alunos(List<Aluno> alunos) {
-        setAlunos(alunos);
-        return this;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     @Override
@@ -121,12 +117,12 @@ public class Projeto implements Serializable {
             return false;
         }
         Projeto projeto = (Projeto) o;
-        return id == projeto.id && Objects.equals(titulo, projeto.titulo) && Objects.equals(areaInteresse, projeto.areaInteresse) && Objects.equals(desccricao, projeto.desccricao) && Objects.equals(alunos, projeto.alunos);
+        return id == projeto.id && Objects.equals(titulo, projeto.titulo) && Objects.equals(areaInteresse, projeto.areaInteresse) && Objects.equals(descricao, projeto.descricao) && Objects.equals(alunos, projeto.alunos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, areaInteresse, desccricao, alunos);
+        return Objects.hash(id, titulo, areaInteresse, descricao, alunos);
     }
 
     @Override
@@ -135,7 +131,7 @@ public class Projeto implements Serializable {
             " id='" + getId() + "'" +
             ", titulo='" + getTitulo() + "'" +
             ", areaInteresse='" + getAreaInteresse() + "'" +
-            ", desccricao='" + getDesccricao() + "'" +
+            ", descricao='" + getDescricao() + "'" +
             ", alunos='" + getAlunos() + "'" +
             "}";
     }

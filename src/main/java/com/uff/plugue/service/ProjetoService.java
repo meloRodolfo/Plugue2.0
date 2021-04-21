@@ -1,6 +1,6 @@
 package com.uff.plugue.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Projeto;
@@ -14,20 +14,41 @@ public class ProjetoService {
     @Autowired
     private ProjetoDAO dao;
 
-    public void addProjeto(Projeto projeto) {
-        dao.save(projeto);
+    public Projeto addProjeto(Projeto projeto) {
+            dao.save(projeto);
+            return dao.findByAreaInteresseAndTitulo(projeto.getTitulo(), projeto.getAreaInteresse()).get();
+        
     }
 
-    public void updateProjeto(Long id, Projeto projeto) {
-        projeto.setId(id);
-        dao.save(projeto);
+    public Projeto updateProjeto(int id, Projeto projeto) {
+            projeto.setId(id);
+            dao.save(projeto);
+            return dao.findById(id).get();
     }
 
-    public Optional<Projeto> getProjeto(int id) {
-        return dao.findById(id);
+    public Projeto getProjeto(int id) {
+        return dao.findById(id).get();
     }
 
-    public void deleteProjeto(int id) {
+    public String deleteProjeto(int id) {
         dao.deleteById(id);
+        return "Apagado com sucesso";
     }
+
+    public List<Projeto> listarProjetos() {
+
+        return dao.findAll();
+    }
+
+    public List<Projeto> buscaProjetoPorTitulo(String titulo) {
+        return dao.findByTitulo(titulo);
+    }
+
+    public List<Projeto> buscaProjetoPorArea(String areaInteresse) {
+        return dao.findByAreaInteresse(areaInteresse);
+    }
+
+    public List<Projeto> buscaProjetoPorTituloArea(String titulo, String areaInteresse) {
+        return dao.findByTituloAndAreaInteresse(titulo, areaInteresse);
+    }   
 }
