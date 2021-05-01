@@ -16,7 +16,7 @@ public class ProjetoService {
 
     public Projeto addProjeto(Projeto projeto) {
             dao.save(projeto);
-            return dao.findByAreaInteresseAndTitulo(projeto.getTitulo(), projeto.getAreaInteresse()).get();
+            return dao.findById(projeto.getId()).get();
         
     }
 

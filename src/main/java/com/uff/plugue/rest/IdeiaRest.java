@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @CrossOrigin
 @RequestMapping("/ideia")
-@Api(value = "Aluno")
+@Api(value = "Ideia")
 public class IdeiaRest {
 
     @Autowired

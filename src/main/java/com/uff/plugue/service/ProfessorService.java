@@ -35,7 +35,7 @@ public class ProfessorService {
 
     public Ideia interessar(int idIdeia, int idProfessor) {
         Professor professor = dao.findById(idProfessor).get();
-        Ideia ideia = ideiaDao.findById(idIdeia).get();
+        Ideia ideia = ideiaDao.findById(idIdeia);
 
         Ideia ideiaInteresse = ideia;
         ideiaInteresse.setProfessor(professor);
