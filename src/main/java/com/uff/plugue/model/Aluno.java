@@ -22,6 +22,9 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class, 
+    property = "id")
 public class Aluno extends Usuario {
 
     private static final long serialVersionUID = 1L;
