@@ -39,8 +39,8 @@ public class Aluno extends Usuario {
     public Aluno() {
     }
 
-    public Aluno(int id, String nome, String contato, String senha, String curso, List<Projeto> projetos, List<Ideia> ideias) {
-        super(id, nome, contato, senha);
+    public Aluno(int id, String nome, String contato, String senha, String curso, List<Projeto> projetos, List<Ideia> ideias, String tipoUsuario) {
+        super(id, nome, contato, senha, tipoUsuario);
         this.curso = curso;
         this.projetos = projetos;
         this.ideias = ideias;

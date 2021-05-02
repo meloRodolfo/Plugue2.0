@@ -39,8 +39,8 @@ public class Professor extends Usuario{
     public Professor() {
     }
 
-    public Professor(int id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias, List<Projeto> projetos) {
-        super(id, nome, contato, senha);
+    public Professor(int id, String nome, String contato, String senha, String paginaPessoal, List<Ideia> ideias, List<Projeto> projetos, String tipoUsuario) {
+        super(id, nome, contato, senha, tipoUsuario);
         this.paginaPessoal = paginaPessoal;
         this.ideias = ideias;
         this.projetos = projetos;
