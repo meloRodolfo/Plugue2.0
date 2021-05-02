@@ -1,6 +1,7 @@
 package com.uff.plugue.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.uff.plugue.dao.IdeiaDAO;
 import com.uff.plugue.model.Ideia;
@@ -14,14 +15,18 @@ public class IdeiaService {
     @Autowired
     private IdeiaDAO dao;
 
-    public Ideia addIdeia(Ideia ideia) {
+    public Optional<Ideia> addIdeia(Ideia ideia) {
         dao.save(ideia);
         return dao.findById(ideia.getId());
     }
 
-    public Ideia updateIdeia(int id, Ideia ideia){
+    public Optional<Ideia> updateIdeia(int id, Ideia ideia){
         ideia.setId(id);
         dao.save(ideia);
+        return dao.findById(id);
+    }
+
+    public Optional<Ideia> getIdeia(int id) {
         return dao.findById(id);
     }
 

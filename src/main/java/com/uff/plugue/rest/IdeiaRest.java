@@ -2,11 +2,13 @@ package com.uff.plugue.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.uff.plugue.model.Ideia;
 import com.uff.plugue.service.IdeiaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,13 +34,13 @@ public class IdeiaRest {
 
     @PostMapping
     @ApiOperation(value = "Cria uma nova ideia")
-    public Ideia salvar(@RequestBody Ideia ideia) {
+    public Optional<Ideia> salvar(@RequestBody Ideia ideia) {
         return ideiaService.addIdeia(ideia);
     }
 
     @PutMapping(path ={"/{id}"})
     @ApiOperation(value = "Atualiza uma ideia")
-    public Ideia atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
+    public Optional<Ideia> atualizar(@PathVariable("id") int id, @RequestBody Ideia ideia) {
         return ideiaService.updateIdeia(id, ideia);
     }
 
@@ -53,6 +55,12 @@ public class IdeiaRest {
 
         if(titulo == null && areaInteresse == null) return ideiaService.getIdeias();
         return ideias;      
+    }
+
+    @GetMapping(path = {"/{id}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Busca uma ideia")
+    public Optional<Ideia> getIdeia (@PathVariable("id") int id){  
+        return ideiaService.getIdeia(id);     
     }
 
     @DeleteMapping(path ={"/{id}"})
