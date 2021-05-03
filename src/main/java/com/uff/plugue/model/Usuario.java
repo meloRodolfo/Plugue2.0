@@ -30,14 +30,18 @@ public class Usuario implements Serializable {
     @Column 
     private String senha;
 
+    @Column
+    private String tipoUsuario;
+
     public Usuario() {
     }
 
-    public Usuario(int id, String nome, String contato, String senha) {
+    public Usuario(int id, String nome, String contato, String senha, String tipoUsuario) {
         this.id = id;
         this.nome = nome;
         this.contato = contato;
         this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public int getId() {
@@ -72,6 +76,14 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public String getTipoUsuario() {
+        return this.tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public Usuario id(int id) {
         setId(id);
         return this;
@@ -100,12 +112,16 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome) && Objects.equals(contato, usuario.contato) && Objects.equals(senha, usuario.senha);
+        return Objects.equals(id, usuario.id) 
+        && Objects.equals(nome, usuario.nome) 
+        && Objects.equals(contato, usuario.contato) 
+        && Objects.equals(senha, usuario.senha)
+        && Objects.equals(tipoUsuario, usuario.tipoUsuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, contato, senha);
+        return Objects.hash(id, nome, contato, senha, tipoUsuario);
     }
 
     @Override
@@ -115,6 +131,7 @@ public class Usuario implements Serializable {
             ", nome='" + getNome() + "'" +
             ", contato='" + getContato() + "'" +
             ", senha='" + getSenha() + "'" +
+            ", tipoUsuario='" + getTipoUsuario() + "'" +
             "}";
     }
 

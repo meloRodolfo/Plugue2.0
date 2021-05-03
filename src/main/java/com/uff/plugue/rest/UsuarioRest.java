@@ -1,5 +1,7 @@
 package com.uff.plugue.rest;
 
+import java.util.List;
+
 import javax.naming.AuthenticationException;
 
 import com.uff.plugue.model.Usuario;
@@ -50,5 +52,11 @@ public class UsuarioRest {
     @ApiOperation(value = "Excluir usuario")
     public String excluiUsuario(@PathVariable("id") int id){
         return usuarioService.deleteUsuario(id);
+    }
+
+    @GetMapping(value = "/todos")
+    @ApiOperation(value = "Lista usuário")
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
 }
