@@ -25,7 +25,7 @@ import org.hibernate.annotations.FetchMode;
 public class Aluno extends Usuario {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Column
     private String curso;
     

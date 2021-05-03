@@ -7,6 +7,7 @@ import com.uff.plugue.model.Ideia;
 import com.uff.plugue.service.IdeiaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,10 +47,11 @@ public class IdeiaRest {
     @ApiOperation(value = "Lista ideias")
     public List<Ideia> listaIdeias (
         @RequestParam(required = false) String titulo, 
-        @RequestParam(required = false) String areaInteresse
+        @RequestParam(required = false) String areaInteresse,
+        @RequestParam(required = false) String idAluno
     ){  
         List<Ideia> ideias = new ArrayList<Ideia>();
-        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo));
+        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo, idAluno));
 
         if(titulo == null && areaInteresse == null) return ideiaService.getIdeias();
         return ideias;      

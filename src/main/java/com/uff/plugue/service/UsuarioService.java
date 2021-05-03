@@ -1,5 +1,6 @@
 package com.uff.plugue.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.naming.AuthenticationException;
@@ -37,4 +38,9 @@ public class UsuarioService {
         dao.deleteById(id);
         return "Usuário deletado com sucesso";
     }
+
+    public List<Usuario> listarUsuarios() {
+        return dao.findAll();
+    }
+    
 }
