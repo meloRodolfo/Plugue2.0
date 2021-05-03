@@ -44,7 +44,7 @@ public class IdeiaService {
         else if(titulo != null) return dao.findByTitulo(titulo);
         else if(idAluno != null) {
             Aluno aluno = daoAluno.findById(Integer.parseInt(idAluno)).get();
-            return dao.findByAluno_Id(aluno.getId());
+            return dao.findByAluno(aluno);
         }
         else return dao.findByAreaInteresse(areaInteresse);
     }

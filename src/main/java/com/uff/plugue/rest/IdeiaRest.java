@@ -49,12 +49,12 @@ public class IdeiaRest {
     public List<Ideia> listaIdeias (
         @RequestParam(required = false) String titulo, 
         @RequestParam(required = false) String areaInteresse,
-        @RequestParam(required = false) String idAluno
+        @RequestParam(required = false) String id
     ){  
         List<Ideia> ideias = new ArrayList<Ideia>();
-        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo, idAluno));
+        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo, id));
 
-        if(titulo == null && areaInteresse == null) return ideiaService.getIdeias();
+        if(titulo == null && areaInteresse == null && id == null) return ideiaService.getIdeias();
         return ideias;      
     }
 
