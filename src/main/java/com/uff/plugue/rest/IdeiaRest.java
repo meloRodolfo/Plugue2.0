@@ -48,10 +48,11 @@ public class IdeiaRest {
     @ApiOperation(value = "Lista ideias")
     public List<Ideia> listaIdeias (
         @RequestParam(required = false) String titulo, 
-        @RequestParam(required = false) String areaInteresse
+        @RequestParam(required = false) String areaInteresse,
+        @RequestParam(required = false) String idAluno
     ){  
         List<Ideia> ideias = new ArrayList<Ideia>();
-        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo));
+        ideias.addAll(ideiaService.getIdeiaPorParametros(areaInteresse, titulo, idAluno));
 
         if(titulo == null && areaInteresse == null) return ideiaService.getIdeias();
         return ideias;      

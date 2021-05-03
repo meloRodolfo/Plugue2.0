@@ -49,7 +49,8 @@ public class Ideia implements Serializable {
     private List<Professor> professores;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="aluno_id")
+    @JoinColumn(name="aluno_id", nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
     private Aluno aluno;
 
     public Ideia() {
