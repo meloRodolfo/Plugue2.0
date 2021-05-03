@@ -59,7 +59,7 @@ public class ProjetoService {
     
     public List<Projeto> buscaProjetoPorProfessor(String id) {
         Professor professor = new Professor();
-        professor = professorDao.findById(Integer.parseInt(id)).get();
+        professor = professorDao.findById(Integer.parseInt(id));
         return dao.findByProfessor(professor);
     }
 }
