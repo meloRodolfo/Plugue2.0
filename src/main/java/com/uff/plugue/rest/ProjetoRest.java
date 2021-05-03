@@ -57,18 +57,23 @@ public class ProjetoRest {
 
     @GetMapping
     @ApiOperation(value = "Lista projetos")
-    public List<Projeto> listaProjetos(@RequestParam(required = false) String titulo, 
-                                       @RequestParam(required = false) String areaInteresse) {
+    public List<Projeto> listaProjetos(
+        @RequestParam(required = false) String titulo, 
+        @RequestParam(required = false) String areaInteresse,
+        @RequestParam(required = false) String id
+    ) {
         List<Projeto> projetos = new ArrayList<>();
         if(titulo != null && areaInteresse != null) {
             projetos.addAll(projetoService.buscaProjetoPorTituloArea(titulo, areaInteresse)) ;
         } else if(titulo != null) {
             projetos.addAll(projetoService.buscaProjetoPorTitulo(titulo));
-        } else if(areaInteresse != null){
-            projetos.addAll(projetoService.buscaProjetoPorArea(areaInteresse));
-        } else {
-            projetos.addAll(projetoService.listarProjetos());
+        } else if(id != null) {
+            projetos.addAll(projetoService.buscaProjetoPorProfessor(id));
         }
+        else {
+            projetos.addAll(projetoService.buscaProjetoPorArea(areaInteresse));
+        }
+        if(titulo == null && areaInteresse == null && id == null) return projetoService.listarProjetos();
 
         return projetos;
     }
