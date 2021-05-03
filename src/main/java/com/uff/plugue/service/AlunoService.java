@@ -1,5 +1,7 @@
 package com.uff.plugue.service;
 
+import java.util.List;
+
 import com.uff.plugue.dao.AlunoDAO;
 import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Aluno;
@@ -40,5 +42,10 @@ public class AlunoService {
         proj.setAluno(aluno);
         projetoDao.save(proj);
         return aluno;
+    }
+
+    public List<Projeto> retornarInteresses(int id) {
+        Aluno aluno = dao.findById(id).get();
+        return aluno.getProjetos();
     }
 }
