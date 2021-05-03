@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface AlunoDAO extends JpaRepository<Aluno, Integer> {
 
     Optional<Aluno> findByContato(String contato);
+    Aluno findById(int id);
 }

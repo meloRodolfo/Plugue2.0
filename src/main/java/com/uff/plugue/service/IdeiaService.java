@@ -16,13 +16,13 @@ public class IdeiaService {
 
     public Ideia addIdeia(Ideia ideia) {
         dao.save(ideia);
-        return dao.findByTituloAndAreaInteresse(ideia.getAreaInteresse(), ideia.getTitulo()).get();
+        return dao.findById(ideia.getId());
     }
 
     public Ideia updateIdeia(int id, Ideia ideia){
         ideia.setId(id);
         dao.save(ideia);
-        return dao.findById(id).get();
+        return dao.findById(id);
     }
 
     public List<Ideia> getIdeias() {

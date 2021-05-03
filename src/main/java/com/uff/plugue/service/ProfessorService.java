@@ -19,23 +19,23 @@ public class ProfessorService {
 
     public Professor addProfessor(Professor professor) {
         dao.save(professor);
-        return dao.findByContato(professor.getContato()).get();
+        return dao.findById(professor.getId());
     }
 
     public Professor updateProfessor(int id, Professor professor) {
         professor.setId(id);
         dao.save(professor);
-        return dao.findByContato(professor.getContato()).get();
+        return dao.findById(id);
 
     }
 
-    public Professor getProfessor(Integer id) {
-        return dao.findById(id).get();
+    public Professor getProfessor(int id) {
+        return dao.findById(id);
     }
 
     public Ideia interessar(int idIdeia, int idProfessor) {
-        Professor professor = dao.findById(idProfessor).get();
-        Ideia ideia = ideiaDao.findById(idIdeia).get();
+        Professor professor = dao.findById(idProfessor);
+        Ideia ideia = ideiaDao.findById(idIdeia);
 
         Ideia ideiaInteresse = ideia;
         ideiaInteresse.setProfessor(professor);

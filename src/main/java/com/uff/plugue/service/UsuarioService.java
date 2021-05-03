@@ -27,9 +27,9 @@ public class UsuarioService {
     }
 
     public String resetSenha(int id, String senha) {
-        Optional<Usuario> usuario = dao.findById(id);
-        usuario.get().setSenha(senha);
-        dao.save(usuario.get());
+        Usuario usuario = dao.findById(id);
+        usuario.setSenha(senha);
+        dao.save(usuario);
         return "Senha atualizada com sucesso";
     }
 

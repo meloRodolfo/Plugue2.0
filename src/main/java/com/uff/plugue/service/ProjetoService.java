@@ -16,18 +16,18 @@ public class ProjetoService {
 
     public Projeto addProjeto(Projeto projeto) {
             dao.save(projeto);
-            return dao.findByAreaInteresseAndTitulo(projeto.getTitulo(), projeto.getAreaInteresse()).get();
+            return dao.findById(projeto.getId());
         
     }
 
     public Projeto updateProjeto(int id, Projeto projeto) {
             projeto.setId(id);
             dao.save(projeto);
-            return dao.findById(id).get();
+            return dao.findById(id);
     }
 
     public Projeto getProjeto(int id) {
-        return dao.findById(id).get();
+        return dao.findById(id);
     }
 
     public String deleteProjeto(int id) {

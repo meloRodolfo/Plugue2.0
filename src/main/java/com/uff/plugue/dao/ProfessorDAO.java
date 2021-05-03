@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfessorDAO extends JpaRepository<Professor, Integer> {
     
-    Professor findByContatoAndSenha(String contato, String senha);
     Optional<Professor> findByContato(String contato);
+    Professor findById(int id);
 }
