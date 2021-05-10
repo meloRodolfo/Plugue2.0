@@ -1,5 +1,8 @@
 package com.uff.plugue.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.uff.plugue.dao.IdeiaDAO;
 import com.uff.plugue.dao.ProfessorDAO;
 import com.uff.plugue.model.Ideia;
@@ -41,6 +44,11 @@ public class ProfessorService {
         ideiaInteresse.setProfessor(professor);
         ideiaDao.save(ideiaInteresse);
         return ideia;
+    }
+
+    public List<Ideia> retornarInteresses(int id) {
+        Professor professor = dao.findById(id);
+        return professor.getIdeias();
     }
 
 }

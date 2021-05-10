@@ -1,6 +1,8 @@
 package com.uff.plugue.service;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import java.util.List;
+
 import com.uff.plugue.dao.AlunoDAO;
 import com.uff.plugue.dao.ProjetoDAO;
 import com.uff.plugue.model.Aluno;
@@ -43,4 +45,8 @@ public class AlunoService {
         return aluno;
     }
 
+    public List<Projeto> retornarInteresses(int id) {
+        Aluno aluno = dao.findById(id);
+        return aluno.getProjetos();
+    }
 }

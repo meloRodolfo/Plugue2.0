@@ -1,6 +1,9 @@
 package com.uff.plugue.rest;
 
+import java.util.List;
+
 import com.uff.plugue.model.Aluno;
+import com.uff.plugue.model.Projeto;
 import com.uff.plugue.service.AlunoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +50,11 @@ public class AlunoRest {
     @ApiOperation(value = "Informa interesse de aluno em um projeto")
     public Aluno interessar(@PathVariable("idAluno") int idAluno, @PathVariable("idProjeto") int idProjeto) {
         return alunoService.interessar(idProjeto, idAluno);
+    }
+
+    @GetMapping(path = {"/{id}/projetos"})
+    @ApiOperation(value = "Retorna projetos de interesse de um aluno")
+    public List<Projeto> listarInteresses(@PathVariable("id") int id) {
+        return alunoService.retornarInteresses(id);
     }
 }

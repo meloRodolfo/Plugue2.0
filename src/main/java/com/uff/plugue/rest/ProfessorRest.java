@@ -1,5 +1,7 @@
 package com.uff.plugue.rest;
 
+import java.util.List;
+
 import com.uff.plugue.model.Ideia;
 import com.uff.plugue.model.Professor;
 import com.uff.plugue.service.ProfessorService;
@@ -51,6 +53,12 @@ public class ProfessorRest {
     @ApiOperation(value = "Informa interesse de professor em uma ideia")
     public Ideia interessar(@PathVariable("idIdeia") int idIdeia, @PathVariable("idProfessor") int idProfessor) {
         return professorService.interessar(idIdeia, idProfessor);
+    }
+
+    @GetMapping(path = {"/{id}/ideias"})
+    @ApiOperation(value = "Retorna projetos de interesse de um aluno")
+    public List<Ideia> listarInteresses(@PathVariable("id") int id) {
+        return professorService.retornarInteresses(id);
     }
 
 }
